@@ -1,7 +1,9 @@
 import React, { PropTypes } from 'react'
 import R from 'ramda';
+import { makeGrid } from '../utils/';
 
-import Cell from '../components/cell';
+import Cell from '../components/Cell';
+import CellRow from '../components/CellRow';
 
 const Grid = React.createClass({
 
@@ -25,45 +27,26 @@ const Grid = React.createClass({
         })
     },
 
-    makeRow(rowIndex, dim) {
-        let cells = [];
-        for (let i = 1; i <= dim; i++) {
-            let coordinates = [ rowIndex, i ];
-            let isActive = R.contains(coordinates, this.state.active);
-
-            cells.push(
-                <Cell 
-                    key={ coordinates.toString() } 
-                    onClick={ this.makeActive.bind( this, coordinates) }
-                    isActive={ isActive }
-                    gridDim={ dim }
-                    cellMarg={ this.state.cellMarg }
-                />
-            )
-        }
-
-        return ( 
-            <div
-                key={ "row: " + rowIndex }
-                style={ this.style().row } 
-            >
-                { cells }
-            </div>
-        )
-    }, 
-
     render() {
         let gridDim = this.state.gridDim;
-        let grid = [];
-        for (let i = 1; i <= gridDim; i++) {
-            grid.push(
-                this.makeRow( i, gridDim )
-            )
-        } 
+        let grid = makeGrid(gridDim, gridDim);
 
         return (
             <div>
-                { grid }
+                { 
+                    grid.map( ( row, i ) => {
+                        return (
+                            <CellRow
+                                key={ row.toString() }
+                                row={ row }
+                                onClick={ this.makeActive }
+                                gridDim={ this.state.gridDim }
+                                cellMarg={ this.state.cellMarg }
+                                active={ this.state.active }
+                            />
+                        )
+                    }) 
+                }
             </div>
         )
     },
