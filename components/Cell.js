@@ -1,23 +1,19 @@
-import React, { PropTypes } from 'react';
+import React, { PropTypes } from 'react'
 
-const Cell = ({ onClick, isActive, gridDim, cellMarg }) => {
-    let cellDim = 100 / gridDim;
-    let background;
-
-    if (isActive) {
-        background = "palegreen";
-    } else { background = "whitesmoke" };
-    
+const Cell = ({ 
+    onClick, active, activeColor, size 
+}) => {
+    let cellSize = 100 / size;
     let style = {    
+        transition: "all ease .2s",
         cursor: "pointer",
         boxSizing: "border-box",
-        background,
-        width: cellDim - cellMarg + "%",
-        paddingBottom: cellDim - cellMarg + "%",
-        margin: `0px ${ cellMarg }%`
+        background: active ? activeColor : 'whitesmoke' ,
+        width: cellSize - .4 + "%",
+        paddingBottom: cellSize - .4 + "%",
+        margin: ".2%"
     }
-
-    return   (
+    return (
         <div
             onClick={onClick}
             style={style}
@@ -27,8 +23,8 @@ const Cell = ({ onClick, isActive, gridDim, cellMarg }) => {
 
 Cell.propTypes = {
   onClick: PropTypes.func.isRequired,
-  isActive: PropTypes.bool.isRequired,
-  gridDim: PropTypes.number.isRequired
+  active: PropTypes.bool.isRequired,
+  activeColor: PropTypes.string.isRequired
 }
 
-export default Cell;
+export default Cell

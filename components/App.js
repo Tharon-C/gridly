@@ -1,20 +1,37 @@
 import React from 'react'
-import Footer from './Footer'
-import AddTodo from '../containers/AddTodo'
-import VisibleTodoList from '../containers/VisibleTodoList'
-import Grid from '../containers/Grid'
+import normalizeCSS from 'normalize.css';
+import baseStyle from '../base.css';
+import AppBar from './AppBar';
+import Editor from '../containers/Editor';
+import Grid from '../containers/Grid';
 
 const App = () => (
     <div>
+        <AppBar/>
         <div 
             style={{ 
-                maxWidth: "400px", 
-                margin: "auto" 
-            }} 
+                display: "flex", 
+                position: "fixed", 
+                width: "100%", 
+                top: "40px", 
+                bottom: "0" 
+            }}
         >
-            <Grid />
+	    <Editor/>
+            <div style={{
+                    padding: "50px 10px 0px",
+                    width: "100%",
+                }}
+            >
+                <div style={{ 
+                        maxWidth: "500px", 
+                        margin: "auto" 
+                    }}
+                >
+                    <Grid/>
+                </div>
+            </div>
         </div>
   </div>
 )
-
 export default App

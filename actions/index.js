@@ -1,22 +1,29 @@
-let nextTodoId = 0
-export const addTodo = (text) => {
+export const toggleCell = (id, color) => {
   return {
-    type: 'ADD_TODO',
-    id: nextTodoId++,
-    text
+    type: 'TOGGLE_CELL',
+    id,
+    activeColor: color,
   }
 }
 
-export const setVisibilityFilter = (filter) => {
+export const drawCell = (id, color) => {
   return {
-    type: 'SET_VISIBILITY_FILTER',
-    filter
+    type: 'DRAW_CELL',
+    id,
+    activeColor: color,
   }
 }
 
-export const toggleTodo = (id) => {
-  return {
-    type: 'TOGGLE_TODO',
-    id
-  }
+export const refreshCells = () => {   
+    return { 
+        type: 'REFRESH_CELLS' 
+    }
 }
+
+export const changeColor = (color) => {
+    return {
+        type: 'CHANGE_COLOR',
+        color
+    }
+}
+
